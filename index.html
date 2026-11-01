@@ -1,11 +1,427 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>BioSand</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioSAND | Advancing Human Health Through Bioinnovation</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --surface-color: #0f0f0f;
+            --border-color: rgba(212, 175, 55, 0.2);
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --silver: #e0e0e0;
+            --text-main: #f5f5f7;
+            --text-muted: #a1a1a6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--silver) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .logo-sub {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 5% 100px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Sections Grid (McKinsey Style Cards) */
+        .section-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .team-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: var(--gold);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #111, var(--gold));
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .team-card h4 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 50px 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background-color: #030303;
+        }
+
+        footer p span {
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>مرحباً بك في موقع BioSand</h1>
-    <p>قريباً سيتم إطلاق الموقع الرسمي للمشروع.</p>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <span class="logo-text" id="logo-text">BioSAND</span>
+            <span class="logo-sub" id="logo-sub">Advancing Human Health Through Bioinnovation</span>
+        </div>
+        <div class="nav-actions">
+            <button class="lang-btn" onclick="toggleLanguage()">العربية</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <span class="hero-badge" id="hero-badge">Vision 2030 Aligned · Riyadh, Saudi Arabia</span>
+            <h1 id="hero-title">Engineering the Future of <span>Biotechnology & Clinical AI</span></h1>
+            <p id="hero-desc">Building Saudi Arabia's first scalable biotechnology manufacturing platform for recombinant proteins, enzymes, alongside advanced AI-driven clinical health solutions[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span).</p>
+        </div>
+    </section>
+
+    <!-- Core Divisions -->
+    <section class="section-container">
+        <h2 class="section-title" id="div-title">Strategic Core Divisions</h2>
+        <p class="section-desc" id="div-desc">Pioneering local manufacturing and intelligent healthcare systems.</p>
+        
+        <div class="grid-2">
+            <div class="card">
+                <h3 id="c1-title">BioSAND Factory</h3>
+                <p id="c1-desc">Establishing the Kingdom's first scalable biotech infrastructure to locally manufacture recombinant proteins and molecular biology enzymes, reducing import dependency and supply chain risks[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span).</p>
+            </div>
+            <div class="card">
+                <h3 id="c2-title">BioRuh Health AI</h3>
+                <p id="c2-desc">An advanced AI-powered clinical decision support platform unifying medical records, imaging, and genomics for early disease detection and precise patient risk stratification[span_4](start_span)[span_4](end_span).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership & Team Section -->
+    <section class="section-container" id="team">
+        <h2 class="section-title" id="team-title">Leadership & Executive Team</h2>
+        <p class="section-desc" id="team-desc">World-class expertise driving national strategic transformation.</p>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">SA</div>
+                <h4>Eng. Samer Alaydi</h4>
+                <div class="team-role" id="role-1">Founder & CEO</div>
+                <p id="desc-1">Leading strategic vision and operational excellence with extensive background in technical program management and digital infrastructure[span_5](start_span)[span_5](end_span).</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">AA</div>
+                <h4>Dr. Ali Alyami</h4>
+                <div class="team-role" id="role-2">Co-Founder & Official Representative</div>
+                <p id="desc-2">Driving strategic relationships, healthcare leadership, stakeholder engagement, and institutional growth[span_6](start_span)[span_6](end_span).</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">AQ</div>
+                <h4>Dr. Ali Alqeeli</h4>
+                <div class="team-role" id="role-3">Technical Advisor</div>
+                <p id="desc-3">Providing expert technical governance, advanced engineering frameworks, and architectural oversight for platform scaling.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p id="footer-text">&copy; 2026 BioSAND. Science | Nature | A Healthier Tomorrow. All rights reserved.</p>
+    </footer>
+
+    <!-- Script for Bilingual Toggle -->
+    <script>
+        let currentLang = 'en';
+
+        const translations = {
+            en: {
+                logoSub: "Advancing Human Health Through Bioinnovation",
+                langBtn: "العربية",
+                heroBadge: "Vision 2030 Aligned · Riyadh, Saudi Arabia",
+                heroTitle: "Engineering the Future of <span>Biotechnology & Clinical AI</span>",
+                heroDesc: "Building Saudi Arabia's first scalable biotechnology manufacturing platform for recombinant proteins, enzymes, alongside advanced AI-driven clinical health solutions.",
+                divTitle: "Strategic Core Divisions",
+                divDesc: "Pioneering local manufacturing and intelligent healthcare systems.",
+                c1Title: "BioSAND Factory",
+                c1Desc: "Establishing the Kingdom's first scalable biotech infrastructure to locally manufacture recombinant proteins and molecular biology enzymes, reducing import dependency and supply chain risks.",
+                c2Title: "BioRuh Health AI",
+                c2Desc: "An advanced AI-powered clinical decision support platform unifying medical records, imaging, and genomics for early disease detection and precise patient risk stratification.",
+                teamTitle: "Leadership & Executive Team",
+                teamDesc: "World-class expertise driving national strategic transformation.",
+                role1: "Founder & CEO",
+                desc1: "Leading strategic vision and operational excellence with extensive background in technical program management and digital infrastructure.",
+                role2: "Co-Founder & Official Representative",
+                desc2: "Driving strategic relationships, healthcare leadership, stakeholder engagement, and institutional growth.",
+                role3: "Technical Advisor",
+                desc3: "Providing expert technical governance, advanced engineering frameworks, and architectural oversight for platform scaling.",
+                footerText: "&copy; 2026 BioSAND. Science | Nature | A Healthier Tomorrow. All rights reserved."
+            },
+            ar: {
+                logoSub: "الارتقاء بالصحة البشرية من خلال الابتكار الحيوي",
+                langBtn: "English",
+                heroBadge: "متوافق مع رؤية السعودية 2030 · الرياض، المملكة العربية السعودية",
+                heroTitle: "هندسة مستقبل <span>الت التقنية الحيوية والذكاء الاصطناعي الصحي</span>",
+                heroDesc: "بناء أول منصة تصنيع تقني حيوي قابلة للتوسع في المملكة للبروتينات الموصولة والإنزيمات، بجانب الحلول الصحية السريرية المدعومة بالذكاء الاصطناعي.",
+                divTitle: "القطاعات الاستراتيجية الأساسية",
+                divDesc: "ريادة التصنيع المحلي وأنظمة الرعاية الصحية الذكية.",
+                c1Title: "مصنع بايوساند (BioSAND Factory)",
+                c1Desc: "تأسيس أول بنية تحتية للتصنيع الحيوي في المملكة لإنتاج البروتينات الموصولة ومركبات البيولوجيا الجزيئية محلياً، للحد من الاعتماد على الواردات وتأمين سلاسل الإمداد.",
+                c2Title: "منصة بايوروح للذكاء الاصطناعي الصحي",
+                c2Desc: "منصة متقدمة لدعم القرار السريري مدعومة بالذكاء الاصطناعي تدمج السجلات الطبية والتصوير والجينوم للاكتشاف المبكر للأمراض وتحديد دقيق لمخاطر المرضى.",
+                teamTitle: "فريق القيادة التنفيذية",
+                teamDesc: "خبرات عالمية تقود التحول الاستراتيجي الوطني.",
+                role1: "المؤسس والرئيس التنفيذي",
+                desc1: "قيادة الرؤية الاستراتيجية والتميز التشغيلي بخبرة واسعة في إدارة البرامج التقنية والبنية التحتية الرقمية.",
+                role2: "الشريك المؤسس والممثل الرسمي",
+                desc2: "قيادة العلاقات الإستراتيجية، قيادة الرعاية الصحية، إشراك أصحاب المصلحة، والنمو المؤسسي.",
+                role3: "المستشار التقني",
+                desc3: "تقديم الحوكمة التقنية الخبيرة، وأطر الهندسة المتقدمة، والإشراف المعماري لتوسيع نطاق المنصة.",
+                footerText: "&copy; 2026 بايوساند (BioSAND). العلم | الطبيعة | غدٍ أكثر صحة. جميع الحقوق محفوظة."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const htmlTag = document.documentElement;
+            
+            htmlTag.setAttribute('lang', currentLang);
+            htmlTag.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+            document.getElementById('logo-sub').innerText = translations[currentLang].logoSub;
+            document.querySelector('.lang-btn').innerText = translations[currentLang].langBtn;
+            document.getElementById('hero-badge').innerText = translations[currentLang].heroBadge;
+            document.getElementById('hero-title').innerHTML = translations[currentLang].heroTitle;
+            document.getElementById('hero-desc').innerText = translations[currentLang].heroDesc;
+            
+            document.getElementById('div-title').innerText = translations[currentLang].divTitle;
+            document.getElementById('div-desc').innerText = translations[currentLang].divDesc;
+            document.getElementById('c1-title').innerText = translations[currentLang].c1Title;
+            document.getElementById('c1-desc').innerText = translations[currentLang].c1Desc;
+            document.getElementById('c2-title').innerText = translations[currentLang].c2Title;
+            document.getElementById('c2-desc').innerText = translations[currentLang].c2Desc;
+
+            document.getElementById('team-title').innerText = translations[currentLang].teamTitle;
+            document.getElementById('team-desc').innerText = translations[currentLang].teamDesc;
+            
+            document.getElementById('role-1').innerText = translations[currentLang].role1;
+            document.getElementById('desc-1').innerText = translations[currentLang].desc1;
+            
+            document.getElementById('role-2').innerText = translations[currentLang].role2;
+            document.getElementById('desc-2').innerText = translations[currentLang].desc2;
+            
+            document.getElementById('role-3').innerText = translations[currentLang].role3;
+            document.getElementById('desc-3').innerText = translations[currentLang].desc3;
+
+            document.getElementById('footer-text').innerHTML = translations[currentLang].footerText;
+        }
+    </script>
 </body>
 </html>
